@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
 
 interface MyProps {
     match: any
@@ -64,13 +65,16 @@ class ViewContact extends React.Component<MyProps, MyState> {
             var ad = this.state.items.ad;
             return (
                 <Container>
-                    <h2>{contact.id}.- {contact.first_name} {contact.last_name}</h2>
-                    <img src={contact.avatar} alt={contact.email} />
-                    <h2>{contact.email}</h2>
-                    <hr />
-                    <h2>{ad.company}</h2>
-                    <a href={ad.url}>{ad.url}</a>
-                    <h2>{ad.text}</h2>
+                    <Paper>
+                        <h2>{contact.id}.- {contact.first_name} {contact.last_name}</h2>
+                        <img src={contact.avatar} alt={contact.email} />
+                        <h2>{contact.email}</h2>
+                    </Paper >
+                    <Paper>
+                        <h2>{ad.company}</h2>
+                        <a href={ad.url}>{ad.url}</a>
+                        <h2>{ad.text}</h2>
+                    </Paper >
                 </Container>
             );
         }
