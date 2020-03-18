@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
 import ContactDetails from './ContactDetails.tsx';
+import Pagination from '@material-ui/lab/Pagination';
 
 interface MyProps { }
 
@@ -17,17 +18,35 @@ class ContactList extends React.Component<MyProps, MyState> {
         super(props);
         this.state = {
             isLoaded: false,
-            page: 0,
+            page: 1,
             items: null
         };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.page != nextState.page) this.fetchContacts(nextState.page);
+        return true;
     }
 
     componentDidMount() {
-        fetch("https://reqres.in/api/users?page=2")
+        this.fetchContacts();
+    }
+
+    handleChange(event, value) {
+        this.setState({
+            page: value
+        });
+    }
+
+    fetchContacts(page?: number) {
+        if (!page) page = this.state.page;
+        fetch("https://reqres.in/api/users?page=" + page)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
+                    console.log("=== fetchContacts", result);
+                    console.log("https://reqres.in/api/users?page=" + this.state.page);
                     this.setState({
                         isLoaded: true,
                         items: result,
@@ -44,9 +63,13 @@ class ContactList extends React.Component<MyProps, MyState> {
     }
 
     render() {
+
         if (this.state.items) {
             return (
-                <ContactDetails details={this.state.items.data} />
+                <Container>
+                    <ContactDetails details={this.state.items.data} />
+                    <Pagination count={2} color="primary" page={this.state.page} onChange={this.handleChange} />
+                </Container>
             )
         }
 
