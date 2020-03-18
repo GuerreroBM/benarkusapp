@@ -2,8 +2,7 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import ContactDetails from './ContactDetails.tsx';
 
-interface MyProps {
-}
+interface MyProps { }
 
 interface MyState {
     isLoaded: boolean,
@@ -13,9 +12,6 @@ interface MyState {
 }
 
 class ContactList extends React.Component<MyProps, MyState> {
-    //
-
-    //class ContactList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -49,15 +45,8 @@ class ContactList extends React.Component<MyProps, MyState> {
 
     render() {
         if (this.state.items) {
-            console.log("Awaiting state", this.state.items.data);
             return (
-                <div>
-                    {
-                        this.state.items.data.map(function (obj, i) {
-                            return <span key={obj.id}>{obj.email}</span>
-                        })
-                    }
-                </div>
+                <ContactDetails details={this.state.items.data} />
             )
         }
 
