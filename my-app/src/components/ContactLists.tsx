@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from '@material-ui/core/Container';
 import ContactDetails from './ContactDetails.tsx';
 import Pagination from '@material-ui/lab/Pagination';
@@ -45,8 +45,6 @@ class ContactList extends React.Component<MyProps, MyState> {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log("=== fetchContacts", result);
-                    console.log("https://reqres.in/api/users?page=" + this.state.page);
                     this.setState({
                         isLoaded: true,
                         items: result,
@@ -75,7 +73,7 @@ class ContactList extends React.Component<MyProps, MyState> {
 
         return (
             <Container>
-                <h2>No Contacts to Show</h2>
+                <h2></h2>
             </Container>
         );
     }

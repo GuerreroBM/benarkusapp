@@ -6,6 +6,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -41,9 +42,11 @@ export default function ContactDetails(props) {
                             title={<span>{tile.first_name} {tile.last_name}</span>}
                             subtitle={tile.email}
                             actionIcon={
-                                <IconButton aria-label={`info about ${tile.first_name} ${tile.last_name}`} className={classes.icon}>
-                                    <InfoIcon />
-                                </IconButton>
+                                <Link to={{ pathname: 'contact/' + tile.id }}>
+                                    <IconButton aria-label={`info about ${tile.first_name} ${tile.last_name}`} className={classes.icon}>
+                                        <InfoIcon />
+                                    </IconButton>
+                                </Link>
                             }
                         />
                     </GridListTile>
